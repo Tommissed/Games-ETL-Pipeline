@@ -1,9 +1,17 @@
-from dagster import Definitions, load_assets_from_modules
+from dagster import Definitions, EnvVar
 
-from analytics import assets  # noqa: TID252
-
-all_assets = load_assets_from_modules([assets])
+from analytics.jobs.rawg import run_rawg_etl  # noqa: TID252
+from analytics.resources.postgresql import PostgresqlDatabaseResource
 
 defs = Definitions(
-    assets=all_assets,
+    jobs = [run_rawg_etl],
+    resources = {
+        "postgres_conn": PostgresqlDatabaseResource(
+            DB_SERVER_NAME=EnvVar("DB_SERVER_NAME"),
+            DB_DATABASE_NAME=EnvVar("DB_DATABASE_NAME"),
+            DB_USERNAME=EnvVar("DB_USERNAME"),
+            DB_PASSWORD=EnvVar("DB_PASSWORD"),
+            DB_PORT=EnvVar("DB_PORT")
+        )
+    }
 )
