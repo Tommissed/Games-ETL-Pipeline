@@ -1,9 +1,7 @@
-from dagster import ScheduleDefinition
+from dagster import build_schedule_from_partitioned_job
 
 from analytics.jobs.rawg import run_rawg_etl
 
-rawg_schedule = ScheduleDefinition(
-    name="rawg_schedule",
-    job_name="run_rawg_etl",
-    cron_schedule="0 * * * *",
+rawg_schedule = build_schedule_from_partitioned_job(
+    job=run_rawg_etl
 )

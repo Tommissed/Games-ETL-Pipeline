@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import datetime
 
-from dagster import op, Config, EnvVar, OpExecutionContext
+from dagster import op, Config, EnvVar, OpExecutionContext, asset, TimeWindowPartitionedDefinition
 
 from sqlalchemy import (
     Table, Column, Integer, Text, Date, Boolean, Numeric,
@@ -13,12 +13,10 @@ from sqlalchemy.dialects.postgresql import JSONB
 from analytics.resources.postgresql import PostgresqlDatabaseResource
 from analytics.ops.common import upsert_to_database
 
-
-
 class RAWGApiConfig(Config):
     api_key: str = EnvVar("api_key")
-    date: str
 
+weekday_partition = TimeWindowPartitionedDefinition(start=datetime.date(2024, 1, 1), fmt="%Y-%m-%d", cron_schedule="0 0 * * 1-5")
 
 #gets a page of games from the RAWG API
 #@helper function
@@ -48,8 +46,21 @@ def fetch_games_page(api_key, dt_range, page:int=1, page_size:int=40) -> dict:
     return r.json()
 
 #extracts individual games from the RAWG API response into a list of dicts 'games'
-@op
-def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5) -> list[dict]:
+@asset(
+        partitions_def=weekday_partition,
+)
+def raw_games(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5) -> list[dict]:
+    """
+    extracts raw games data from rawg api for given partition date
+
+    args:
+        context: OpExecutionContext
+        config: RAWGApiConfig
+        max_pages: maximum number of pages to fetch from the API
+
+    returns:
+        List of dictionaries containing raw games data
+    """
     context.log.info("Starting RAWG data extraction")
     page = 1
     non_empty_pages = 0 #implementing a way to track non-empty pages so that we can only extract pages with data
@@ -57,8 +68,8 @@ def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages =
     games = []
 
     while non_empty_pages < max_pages:
-        context.log.info(f"Fetching RAWG page {page}")
-        dt_range = f"{config.date},{config.date}"
+        context.log.info(f"Fetching RAWG page {page} for partition {context.partition_key}")
+        dt_range = f"{context.partition_key},{context.partition_key}"
         data = fetch_games_page(api_key=config.api_key, dt_range=dt_range, page=page)
         results = data.get("results", [])
 
@@ -76,17 +87,29 @@ def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages =
         if max_pages and page > max_pages:
             break
 
-        #break if there are no more valid pages so that the code doesnt loop infinitely.
+        #break if there are no more valid pages so that the code doesnt loop infinitely
         if not data.get("next"):
             break
 
     context.log.info(f"Finished fetching RAWG data, total games: {total_fetched}")
     return games
 
-@op
-def transform_rawg(context: OpExecutionContext, games: list[dict]) -> list[dict]:
+@asset(
+        partitions_def=weekday_partition,
+)
+def transformed_games(context: OpExecutionContext, games: list[dict]) -> list[dict]:
+    """
+    rransforms the raw games data into a more suitable format for loading into the database
+
+    args:
+        context: OpExecutionContext
+        games: List of dictionaries containing raw games data
+
+    returns:
+        List of dictionaries containing transformed games data
+    """
     context.log.info("Starting RAWG data transformation")
-    df = pd.json_normalize(games)
+    df = pd.json_normalize(games) #using pandas, we normalize the list of dicts into a flat table
     df_renamed = df.rename(columns={
         "id": "game_id",
         "slug": "slug",
@@ -107,10 +130,12 @@ def transform_rawg(context: OpExecutionContext, games: list[dict]) -> list[dict]
                               "rating", "ratings", "rating_top", "ratings_count", "reviews_text_count", "metacritic",
                               "playtime", "updated_at", "platforms"]]
     context.log.info("Finished RAWG data transformation")
-    return df_selected.to_dict(orient="records")
+    return df_selected.to_dict(orient="records") #convert the transformed dataframe back to a list of dicts for loading
 
-@op
-def load_rawg(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource, transformed_game=dict) -> None:
+@asset(
+        partitions_def=weekday_partition,
+)
+def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource, transformed_games=dict) -> None:
     context.log.info("Starting RAWG data loading")
 
     #construct the metadata
@@ -141,5 +166,5 @@ def load_rawg(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseReso
         Column("platforms", JSONB),
     )
     context.log.info("Upserting RAWG data into database")
-    upsert_to_database(postgres_conn = postgres_conn, data=transformed_game, table=raw_games, metadata=metadata)
+    upsert_to_database(postgres_conn = postgres_conn, data=transformed_games, table=raw_games, metadata=metadata)
     context.log.info("Data load complete")
