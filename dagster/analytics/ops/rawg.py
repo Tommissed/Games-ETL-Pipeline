@@ -22,13 +22,13 @@ class RAWGApiConfig(Config):
 
 #gets a page of games from the RAWG API
 #@helper function
-def fetch_games_page(api_key, dt, page:int=1, page_size:int=40) -> dict:
+def fetch_games_page(api_key, dt_range, page:int=1, page_size:int=40) -> dict:
     """
     Fetches a single page of games from the RAWG API.
 
     Args:
         api_key: RAWG API key
-        dt: Date timestamp to filter games
+        dt_range: Date timestamp to filter games
         page: The page number to fetch
         page_size: Number of results per page
 
@@ -38,10 +38,10 @@ def fetch_games_page(api_key, dt, page:int=1, page_size:int=40) -> dict:
     url = "https://api.rawg.io/api/games"
     params = {
         "key": api_key,
-        "ordering": "-updated",
+        "ordering": "released", #sorting extracted data by release date (other option includes -updated for most recently updated)
         "page": page,
         "page_size": page_size,
-        "dates": dt
+        "dates": dt_range #rawg api expects date range in the format YYYY-MM-DD,YYYY-MM-DD
     }
     r = requests.get(url, params=params)
     r.raise_for_status()
@@ -57,8 +57,8 @@ def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages =
 
     while True:
         context.log.info(f"Fetching RAWG page {page}")
-        dt = int(datetime.datetime.strptime(config.date, "%Y-%m-%d").timestamp()) # use datefield
-        data = fetch_games_page(api_key=config.api_key, dt=dt, page=page)
+        dt_range = f"{config.date},{config.date}"
+        data = fetch_games_page(api_key=config.api_key, dt_range=dt_range, page=page)
         results = data.get("results", [])
 
         if not results:
