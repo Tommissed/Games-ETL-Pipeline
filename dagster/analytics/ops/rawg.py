@@ -1,14 +1,14 @@
-from dagster import op, Config, EnvVar, OpExecutionContext
-
 import requests
 import pandas as pd
+import datetime
+
+from dagster import op, Config, EnvVar, OpExecutionContext
+
 from sqlalchemy import (
     Table, Column, Integer, Text, Date, Boolean, Numeric,
     TIMESTAMP, MetaData, URL, create_engine
 )
 from sqlalchemy.dialects.postgresql import JSONB
-# from sqlalchemy.dialects import postgresql
-# from datetime import datetime
 
 from analytics.resources.postgresql import PostgresqlDatabaseResource
 from analytics.ops.common import upsert_to_database
@@ -17,17 +17,20 @@ from analytics.ops.common import upsert_to_database
 
 class RAWGApiConfig(Config):
     api_key: str = EnvVar("api_key")
+    date: str
 
 
-#gets a page of games from tshe RAWG API
+#gets a page of games from the RAWG API
 #@helper function
-def fetch_games_page(api_key, page:int=1, page_size:int=40) -> dict:
+def fetch_games_page(api_key, dt, page:int=1, page_size:int=40) -> dict:
     """
     Fetches a single page of games from the RAWG API.
 
     Args:
         api_key: RAWG API key
+        dt: Date timestamp to filter games
         page: The page number to fetch
+        page_size: Number of results per page
 
     Returns:
         Dictionary of 40 games from the response json
@@ -37,7 +40,8 @@ def fetch_games_page(api_key, page:int=1, page_size:int=40) -> dict:
         "key": api_key,
         "ordering": "-updated",
         "page": page,
-        "page_size": page_size
+        "page_size": page_size,
+        "dates": dt
     }
     r = requests.get(url, params=params)
     r.raise_for_status()
@@ -53,7 +57,8 @@ def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages =
 
     while True:
         context.log.info(f"Fetching RAWG page {page}")
-        data = fetch_games_page(api_key=config.api_key,page=page)
+        dt = int(datetime.datetime.strptime(config.date, "%Y-%m-%d").timestamp()) # use datefield
+        data = fetch_games_page(api_key=config.api_key, dt=dt, page=page)
         results = data.get("results", [])
 
         if not results:
