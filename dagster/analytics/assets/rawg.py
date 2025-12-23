@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import datetime
 
-from dagster import op, Config, EnvVar, OpExecutionContext, asset, TimeWindowPartitionedDefinition
+from dagster import Config, EnvVar, OpExecutionContext, asset, DailyPartitionsDefinition, AutomationCondition
 
 from sqlalchemy import (
     Table, Column, Integer, Text, Date, Boolean, Numeric,
@@ -15,8 +15,7 @@ from analytics.ops.common import upsert_to_database
 
 class RAWGApiConfig(Config):
     api_key: str = EnvVar("api_key")
-
-weekday_partition = TimeWindowPartitionedDefinition(start=datetime.date(2024, 1, 1), fmt="%Y-%m-%d", cron_schedule="0 0 * * 1-5")
+    max_pages: int = 5
 
 #gets a page of games from the RAWG API
 #@helper function
@@ -45,18 +44,21 @@ def fetch_games_page(api_key, dt_range, page:int=1, page_size:int=40) -> dict:
     r.raise_for_status()
     return r.json()
 
+games_daily_partition = DailyPartitionsDefinition(start_date=datetime.datetime(2024, 1, 1))
+
 #extracts individual games from the RAWG API response into a list of dicts 'games'
 @asset(
-        partitions_def=weekday_partition,
+        partitions_def = games_daily_partition,
+        #automation_condition=AutomationCondition.on_cron(cron_schedule="0 0 * * 1-5")
+        automation_condition=AutomationCondition.on_cron(cron_schedule="* * * * *")
 )
-def raw_games(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5) -> list[dict]:
+def raw_games(context: OpExecutionContext, config: RAWGApiConfig) -> list[dict]:
     """
     extracts raw games data from rawg api for given partition date
 
     args:
         context: OpExecutionContext
         config: RAWGApiConfig
-        max_pages: maximum number of pages to fetch from the API
 
     returns:
         List of dictionaries containing raw games data
@@ -67,13 +69,18 @@ def raw_games(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5)
     total_fetched = 0
     games = []
 
-    while non_empty_pages < max_pages:
+    while non_empty_pages < config.max_pages:
         context.log.info(f"Fetching RAWG page {page} for partition {context.partition_key}")
         dt_range = f"{context.partition_key},{context.partition_key}"
         data = fetch_games_page(api_key=config.api_key, dt_range=dt_range, page=page)
         results = data.get("results", [])
 
-        if results:
+        if not results:
+            context.log.info(f"No games found for partition {context.partition_key}, stopping fetch.")
+            break
+
+
+        elif results:
             non_empty_pages += 1
             games.extend(results)
             total_fetched += len(results)
@@ -84,7 +91,7 @@ def raw_games(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5)
 
         page +=1
 
-        if max_pages and page > max_pages:
+        if config.max_pages and page > config.max_pages:
             break
 
         #break if there are no more valid pages so that the code doesnt loop infinitely
@@ -95,21 +102,32 @@ def raw_games(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5)
     return games
 
 @asset(
-        partitions_def=weekday_partition,
+        partitions_def=games_daily_partition,
+        automation_condition=AutomationCondition.eager()
 )
-def transformed_games(context: OpExecutionContext, games: list[dict]) -> list[dict]:
+def transformed_games(context: OpExecutionContext, raw_games: list[dict]) -> list[dict]:
     """
     rransforms the raw games data into a more suitable format for loading into the database
 
     args:
         context: OpExecutionContext
-        games: List of dictionaries containing raw games data
+        raw_games: List of dictionaries containing raw games data
 
     returns:
         List of dictionaries containing transformed games data
     """
     context.log.info("Starting RAWG data transformation")
-    df = pd.json_normalize(games) #using pandas, we normalize the list of dicts into a flat table
+
+    if not raw_games:
+        context.log.info("No raw games data for this partition. Returning empty list.")
+        return []
+
+    df = pd.json_normalize(raw_games) #using pandas, we normalize the list of dicts into a flat table
+    
+    if df.empty:
+        context.log.info("Normalized dataframe is empty. Returning empty list.")
+        return []
+    
     df_renamed = df.rename(columns={
         "id": "game_id",
         "slug": "slug",
@@ -133,7 +151,8 @@ def transformed_games(context: OpExecutionContext, games: list[dict]) -> list[di
     return df_selected.to_dict(orient="records") #convert the transformed dataframe back to a list of dicts for loading
 
 @asset(
-        partitions_def=weekday_partition,
+        partitions_def=games_daily_partition,
+        automation_condition=AutomationCondition.eager()
 )
 def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource, transformed_games=dict) -> None:
     context.log.info("Starting RAWG data loading")
