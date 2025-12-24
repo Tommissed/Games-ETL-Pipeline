@@ -50,7 +50,7 @@ games_daily_partition = DailyPartitionsDefinition(start_date=datetime.datetime(2
 @asset(
         partitions_def = games_daily_partition,
         #automation_condition=AutomationCondition.on_cron(cron_schedule="0 0 * * 1-5")
-        automation_condition=AutomationCondition.on_cron(cron_schedule="* * * * *")
+        automation_condition=AutomationCondition.on_cron(cron_schedule="* * * * *") # runs every minute
 )
 def raw_games(context: OpExecutionContext, config: RAWGApiConfig) -> list[dict]:
     """
@@ -124,6 +124,21 @@ def transformed_games(context: OpExecutionContext, raw_games: list[dict]) -> lis
 
     df = pd.json_normalize(raw_games) #using pandas, we normalize the list of dicts into a flat table
     
+    expected_cols = {
+        "id", "slug", "name", "released", "tba", "rating",
+        "ratings", "rating_top", "ratings_count",
+        "reviews_text_count", "metacritic",
+        "playtime", "updated", "platforms"
+    }
+
+    missing = expected_cols - set(df.columns)
+
+    if missing:
+        context.log.warning(
+            f"Missing expected RAWG fields for partition {context.partition_key}: {missing}"
+        )
+
+    
     if df.empty:
         context.log.info("Normalized dataframe is empty. Returning empty list.")
         return []
@@ -157,6 +172,12 @@ def transformed_games(context: OpExecutionContext, raw_games: list[dict]) -> lis
 def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource, transformed_games=dict) -> None:
     context.log.info("Starting RAWG data loading")
 
+    #stops empty loads
+    if not transformed_games:
+        context.log.info("No transformed games to load. Skipping insert.")
+        return
+
+
     #construct the metadata
     context.log.info("Defining RAWG table metadata")
     metadata=MetaData()
@@ -164,7 +185,7 @@ def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource
         "games",
         metadata,
 
-        Column("game_id", Integer, primary_key=True),
+        Column("game_id", Integer, primary_key=True, nullable=False),
         Column("slug", Text),
         Column("name", Text),
         Column("released", Date),
