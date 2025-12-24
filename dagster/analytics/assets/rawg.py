@@ -160,8 +160,8 @@ def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource
     #construct the metadata
     context.log.info("Defining RAWG table metadata")
     metadata=MetaData()
-    raw_games = Table(
-        "raw_games",
+    games = Table(
+        "games",
         metadata,
 
         Column("game_id", Integer, primary_key=True),
@@ -185,5 +185,5 @@ def games(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource
         Column("platforms", JSONB),
     )
     context.log.info("Upserting RAWG data into database")
-    upsert_to_database(postgres_conn = postgres_conn, data=transformed_games, table=raw_games, metadata=metadata)
+    upsert_to_database(postgres_conn = postgres_conn, data=transformed_games, table=games, metadata=metadata)
     context.log.info("Data load complete")

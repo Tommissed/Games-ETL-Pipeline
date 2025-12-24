@@ -10,6 +10,8 @@ analytics.egg-info/dependency_links.txt
 analytics.egg-info/requires.txt
 analytics.egg-info/top_level.txt
 analytics/assets/__init__.py
+analytics/assets/airbyte.py
+analytics/assets/dbt.py
 analytics/assets/rawg.py
 analytics/jobs/__init__.py
 analytics/jobs/rawg.py

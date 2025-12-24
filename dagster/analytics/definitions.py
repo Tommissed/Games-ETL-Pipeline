@@ -6,7 +6,7 @@ from analytics.schedules.rawg import rawg_schedule
 from analytics.assets import rawg
 from analytics.assets.airbyte import all_airbyte_assets, airbyte_workspace
 
-rawg_assets = load_assets_from_modules([rawg], group_name="rawg_postgres")
+rawg_assets = load_assets_from_modules([rawg], group_name="rawg_postgres", key_prefix="postgres")
 
 defs = Definitions(
     assets=[*rawg_assets, *all_airbyte_assets],
