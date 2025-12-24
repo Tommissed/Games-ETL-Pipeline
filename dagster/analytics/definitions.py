@@ -5,11 +5,12 @@ from analytics.resources.postgresql import PostgresqlDatabaseResource
 from analytics.schedules.rawg import rawg_schedule
 from analytics.assets import rawg
 from analytics.assets.airbyte import all_airbyte_assets, airbyte_workspace
+from analytics.assets.dbt import dbt_warehouse, dbt_warehouse_resource
 
 rawg_assets = load_assets_from_modules([rawg], group_name="rawg_postgres", key_prefix="postgres")
 
 defs = Definitions(
-    assets=[*rawg_assets, *all_airbyte_assets],
+    assets=[*rawg_assets, *all_airbyte_assets, dbt_warehouse],
     jobs = [run_rawg_etl],
     schedules=[rawg_schedule], #current schedule is set to run every hour
     resources = {
@@ -20,6 +21,7 @@ defs = Definitions(
             DB_PASSWORD=EnvVar("DB_PASSWORD"),
             DB_PORT=EnvVar("DB_PORT")
         ),
-        "airbyte": airbyte_workspace
+        "airbyte": airbyte_workspace,
+        "dbt_warehouse_resource": dbt_warehouse_resource
     }
 )
