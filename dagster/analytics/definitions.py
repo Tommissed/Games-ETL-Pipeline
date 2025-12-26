@@ -7,7 +7,7 @@ from analytics.assets import rawg
 from analytics.assets.airbyte import all_airbyte_assets, airbyte_workspace
 from analytics.assets.dbt import dbt_warehouse, dbt_warehouse_resource
 
-rawg_assets = load_assets_from_modules([rawg], group_name="rawg_postgres", key_prefix="postgres")
+rawg_assets = load_assets_from_modules([rawg], group_name="RAW_EXTRACTIONS_LOAD_INTO_POSTGRES", key_prefix="postgres")
 
 defs = Definitions(
     assets=[*rawg_assets, *all_airbyte_assets, dbt_warehouse],

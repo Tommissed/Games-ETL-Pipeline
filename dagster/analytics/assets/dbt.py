@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from dagster_dbt import DbtCliResource, dbt_assets, DagsterDbtTranslator
+from dagster_dbt import DbtCliResource, dbt_assets, DagsterDbtTranslator #type: ignore
 from dagster import AssetExecutionContext
 import dagster as dg
 

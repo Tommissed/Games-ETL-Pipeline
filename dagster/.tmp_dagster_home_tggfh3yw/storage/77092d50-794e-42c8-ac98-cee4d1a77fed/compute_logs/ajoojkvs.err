@@ -1,0 +1,13 @@
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - LOGS_CAPTURED - Started capturing logs in process (pid: 35010).
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - STEP_START - Started execution of step "games".
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - Loading 1 partitions...
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - Loading partition 2024-01-02 from /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/transformed_games/2024-01-02 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - LOADED_INPUT - Loaded input "transformed_games" using input manager "io_manager", from output "result" of step "transformed_games"
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - STEP_INPUT - Got input "transformed_games" of type "Any". (Type check passed).
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - GAMES: Starting RAWG data loading
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - GAMES: Defining RAWG table metadata
+[32m2025-12-26 01:20:55 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - GAMES: Upsetting RAWG data into database
+[32m2025-12-26 01:20:56 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - games - GAMES: Data load complete
+[32m2025-12-26 01:20:56 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
+[32m2025-12-26 01:20:56 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - ASSET_MATERIALIZATION - Materialized value postgres games.
+[32m2025-12-26 01:20:56 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 77092d50-794e-42c8-ac98-cee4d1a77fed - 35010 - games - STEP_SUCCESS - Finished execution of step "games" in 466ms.

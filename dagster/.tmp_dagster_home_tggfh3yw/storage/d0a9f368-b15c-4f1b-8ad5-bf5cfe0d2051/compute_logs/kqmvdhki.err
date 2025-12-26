@@ -1,0 +1,13 @@
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - LOGS_CAPTURED - Started capturing logs in process (pid: 34740).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - STEP_START - Started execution of step "genres".
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - Loading 1 partitions...
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - Loading partition 2025-12-25 from /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/transformed_genres/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - LOADED_INPUT - Loaded input "transformed_genres" using input manager "io_manager", from output "result" of step "transformed_genres"
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - STEP_INPUT - Got input "transformed_genres" of type "Any". (Type check passed).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - GENRES: Starting RAWG data loading
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - GENRES: Defining RAWG table metadata
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - GENRES: Upsetting RAWG data into database
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - genres - GENRES: Data load complete
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - ASSET_MATERIALIZATION - Materialized value postgres genres.
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34740 - genres - STEP_SUCCESS - Finished execution of step "genres" in 510ms.

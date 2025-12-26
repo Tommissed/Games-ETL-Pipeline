@@ -9,7 +9,7 @@ class CustomDagsterAirbyteTranslator(DagsterAirbyteTranslator):
         return default_spec.replace_attributes(
             key=AssetKey(["rawg", props.table_name]),
             group_name="airbyte_assets",
-            automation_condition=AutomationCondition.on_cron(cron_schedule="* * * * *")
+            automation_condition=AutomationCondition.on_cron(cron_schedule="* * * * *") # runs every minute
         )
 
 airbyte_workspace = AirbyteWorkspace(

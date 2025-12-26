@@ -1,0 +1,11 @@
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - LOGS_CAPTURED - Started capturing logs in process (pid: 34748).
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - raw_games - STEP_START - Started execution of step "raw_games".
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - raw_games - GAMES: Starting RAWG games data extraction
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - raw_games - Fetching RAWG page 1 for partition 2024-01-09
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - raw_games - GAMES: Fetched page 1, total games: 32
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - raw_games - GAMES: Finished fetching RAWG data, total games: 32
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - raw_games - STEP_OUTPUT - Yielded output "result" of type "[dict]". (Type check passed).
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - raw_games - Writing file at: /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/raw_games/2024-01-09 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - raw_games - ASSET_MATERIALIZATION - Materialized value postgres raw_games.
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - raw_games - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 2af932cb-dcfc-4eb3-ad4e-4c23230ab0bb - 34748 - raw_games - STEP_SUCCESS - Finished execution of step "raw_games" in 677ms.
