@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: rawg
+    database: RAWG_GAMES_DB
+    schema: raw 
+    tables:
+      - name: games
+      - name: tags
