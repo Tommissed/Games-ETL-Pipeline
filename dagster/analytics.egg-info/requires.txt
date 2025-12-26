@@ -1,5 +1,11 @@
 dagster
 dagster-cloud
+dagster-airbyte
+dagster-dbt
+dbt-core
+dbt-snowflake
+pandas
+pg8000
 
 [dev]
 dagster-webserver

@@ -1,0 +1,11 @@
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - LOGS_CAPTURED - Started capturing logs in process (pid: 34452).
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - raw_stores - STEP_START - Started execution of step "raw_stores".
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_stores - STORES: Starting RAWG data extraction
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_stores - STORES: Fetching stores
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_stores - STORES: Fetched page 1, total stores: 10
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_stores - STORES: Finished fetching RAWG data, total stores: 10
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - raw_stores - STEP_OUTPUT - Yielded output "result" of type "[dict]". (Type check passed).
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_stores - Writing file at: /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/raw_stores/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - raw_stores - ASSET_MATERIALIZATION - Materialized value postgres raw_stores.
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - raw_stores - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34452 - raw_stores - STEP_SUCCESS - Finished execution of step "raw_stores" in 283ms.

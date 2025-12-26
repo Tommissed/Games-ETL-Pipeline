@@ -1,0 +1,13 @@
+[32m2025-12-26 01:20:14 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - LOGS_CAPTURED - Started capturing logs in process (pid: 34659).
+[32m2025-12-26 01:20:14 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - raw_games - STEP_START - Started execution of step "raw_games".
+[32m2025-12-26 01:20:14 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - GAMES: Starting RAWG games data extraction
+[32m2025-12-26 01:20:14 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - Fetching RAWG page 1 for partition 2024-01-05
+[32m2025-12-26 01:20:21 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - GAMES: Fetched page 1, total games: 40
+[32m2025-12-26 01:20:21 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - Fetching RAWG page 2 for partition 2024-01-05
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - GAMES: Fetched page 2, total games: 63
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - GAMES: Finished fetching RAWG data, total games: 63
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - raw_games - STEP_OUTPUT - Yielded output "result" of type "[dict]". (Type check passed).
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - raw_games - Writing file at: /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/raw_games/2024-01-05 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - raw_games - ASSET_MATERIALIZATION - Materialized value postgres raw_games.
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - raw_games - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-12-26 01:20:22 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 8c36dec2-2da3-45b0-be7b-99a83a3a7578 - 34659 - raw_games - STEP_SUCCESS - Finished execution of step "raw_games" in 7.64s.

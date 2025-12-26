@@ -1,0 +1,39 @@
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34587 - LOGS_CAPTURED - Started capturing logs in process (pid: 34587).
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34587 - transformed_tags - STEP_START - Started execution of step "transformed_tags".
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - transformed_tags - Loading 1 partitions...
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - transformed_tags - Loading partition 2025-12-25 from /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/raw_tags/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34587 - transformed_tags - LOADED_INPUT - Loaded input "raw_tags" using input manager "io_manager", from output "result" of step "raw_tags"
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34587 - transformed_tags - STEP_INPUT - Got input "raw_tags" of type "[dict]". (Type check passed).
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - transformed_tags - TAGS: Starting RAWG data transformation
+[32m2025-12-26 01:20:04 -0500[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34587 - transformed_tags - STEP_FAILURE - Execution of step "transformed_tags" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "transformed_tags"::
+
+KeyError: "['domain'] not in index"
+
+Stack Trace:
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/dagster/_core/execution/plan/utils.py", line 57, in op_execution_error_boundary
+    yield
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/dagster/_utils/__init__.py", line 394, in iterate_with_context
+    next_output = next(iterator)
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/dagster/_core/execution/plan/compute_generator.py", line 135, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+        fn, context, kwargs, context_arg_provided, config_arg_class, resource_arg_mapping
+    )
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/dagster/_core/execution/plan/compute_generator.py", line 115, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+           ~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/analytics/assets/rawg.py", line 868, in transformed_tags
+    df_selected = df_renamed[["tags_id", "name", "domain", "slug",
+                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                            "games_count", "image_background", "language", "games"]]
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/pandas/core/frame.py", line 4119, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/dagster/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+[0m

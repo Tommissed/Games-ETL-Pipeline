@@ -6,6 +6,12 @@ Requires-Python: <3.14,>=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: dagster
 Requires-Dist: dagster-cloud
+Requires-Dist: dagster-airbyte
+Requires-Dist: dagster-dbt
+Requires-Dist: dbt-core
+Requires-Dist: dbt-snowflake
+Requires-Dist: pandas
+Requires-Dist: pg8000
 Provides-Extra: dev
 Requires-Dist: dagster-webserver; extra == "dev"
 Requires-Dist: pytest; extra == "dev"

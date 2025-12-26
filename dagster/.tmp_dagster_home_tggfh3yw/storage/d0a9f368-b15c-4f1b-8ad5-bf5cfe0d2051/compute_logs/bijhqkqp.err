@@ -1,0 +1,13 @@
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - LOGS_CAPTURED - Started capturing logs in process (pid: 34749).
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - STEP_START - Started execution of step "platforms".
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - Loading 1 partitions...
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - Loading partition 2025-12-25 from /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/transformed_platforms/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - LOADED_INPUT - Loaded input "transformed_platforms" using input manager "io_manager", from output "result" of step "transformed_platforms"
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - STEP_INPUT - Got input "transformed_platforms" of type "Any". (Type check passed).
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - PLATFORMS: Starting RAWG data loading
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - PLATFORMS: Defining RAWG table metadata
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - PLATFORMS: Upsetting RAWG data into database
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - platforms - PLATFORMS: Data load complete
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - ASSET_MATERIALIZATION - Materialized value postgres platforms.
+[32m2025-12-26 01:20:25 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34749 - platforms - STEP_SUCCESS - Finished execution of step "platforms" in 308ms.

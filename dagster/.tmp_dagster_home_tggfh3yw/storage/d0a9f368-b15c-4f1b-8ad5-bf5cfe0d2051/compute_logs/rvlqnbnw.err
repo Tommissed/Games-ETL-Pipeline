@@ -1,0 +1,13 @@
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - LOGS_CAPTURED - Started capturing logs in process (pid: 34735).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - STEP_START - Started execution of step "stores".
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - Loading 1 partitions...
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - Loading partition 2025-12-25 from /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/transformed_stores/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - LOADED_INPUT - Loaded input "transformed_stores" using input manager "io_manager", from output "result" of step "transformed_stores"
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - STEP_INPUT - Got input "transformed_stores" of type "Any". (Type check passed).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - STORES: Starting RAWG data loading
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - STORES: Defining RAWG table metadata
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - STORES: Upsetting RAWG data into database
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - stores - STORES: Data load complete
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - ASSET_MATERIALIZATION - Materialized value postgres stores.
+[32m2025-12-26 01:20:23 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34735 - stores - STEP_SUCCESS - Finished execution of step "stores" in 507ms.

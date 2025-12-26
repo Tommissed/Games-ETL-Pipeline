@@ -1,0 +1,19 @@
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - LOGS_CAPTURED - Started capturing logs in process (pid: 34453).
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - raw_tags - STEP_START - Started execution of step "raw_tags".
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Starting RAWG data extraction
+[32m2025-12-26 01:19:31 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetching tags
+[32m2025-12-26 01:19:32 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetched page 1, total tags: 40
+[32m2025-12-26 01:19:32 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetching tags
+[32m2025-12-26 01:19:33 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetched page 2, total tags: 80
+[32m2025-12-26 01:19:33 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetching tags
+[32m2025-12-26 01:19:34 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetched page 3, total tags: 120
+[32m2025-12-26 01:19:34 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetching tags
+[32m2025-12-26 01:19:35 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetched page 4, total tags: 160
+[32m2025-12-26 01:19:35 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetching tags
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Fetched page 5, total tags: 200
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mINFO[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - TAGS: Finished fetching RAWG data, total tags: 200
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - raw_tags - STEP_OUTPUT - Yielded output "result" of type "[dict]". (Type check passed).
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - raw_tags - Writing file at: /Users/tommy/Desktop/2025-09-bootcamp/13-capstone-project/PROJECT3/dagster/.tmp_dagster_home_tggfh3yw/storage/postgres/raw_tags/2025-12-25 using PickledObjectFilesystemIOManager...
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - raw_tags - ASSET_MATERIALIZATION - Materialized value postgres raw_tags.
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - raw_tags - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2025-12-26 01:19:36 -0500[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - d0a9f368-b15c-4f1b-8ad5-bf5cfe0d2051 - 34453 - raw_tags - STEP_SUCCESS - Finished execution of step "raw_tags" in 4.18s.

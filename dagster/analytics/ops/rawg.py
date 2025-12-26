@@ -52,29 +52,31 @@ def fetch_games_page(api_key, dt_range, page:int=1, page_size:int=40) -> dict:
 def extract_rawg(context: OpExecutionContext, config: RAWGApiConfig, max_pages = 5) -> list[dict]:
     context.log.info("Starting RAWG data extraction")
     page = 1
+    non_empty_pages = 0 #implementing a way to track non-empty pages so that we can only extract pages with data
     total_fetched = 0
     games = []
 
-    while True:
+    while non_empty_pages < max_pages:
         context.log.info(f"Fetching RAWG page {page}")
         dt_range = f"{config.date},{config.date}"
         data = fetch_games_page(api_key=config.api_key, dt_range=dt_range, page=page)
         results = data.get("results", [])
 
-        if not results:
-            break
+        if results:
+            non_empty_pages += 1
+            games.extend(results)
+            total_fetched += len(results)
+            context.log.info(f"Fetched page {page}, total games: {total_fetched}")
 
-        for game in results:
-            games.append(game)
-            total_fetched += 1
-
-        context.log.info(f"Fetched page {page}, total games: {total_fetched}")
+        else:
+            context.log.info(f"Page {page} is empty, skipping")
 
         page +=1
 
         if max_pages and page > max_pages:
             break
 
+        #break if there are no more valid pages so that the code doesnt loop infinitely.
         if not data.get("next"):
             break
 
@@ -114,8 +116,8 @@ def load_rawg(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseReso
     #construct the metadata
     context.log.info("Defining RAWG table metadata")
     metadata=MetaData()
-    raw_games = Table(
-        "raw_games",
+    games = Table(
+        "games",
         metadata,
 
         Column("game_id", Integer, primary_key=True),
@@ -139,5 +141,5 @@ def load_rawg(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseReso
         Column("platforms", JSONB),
     )
     context.log.info("Upserting RAWG data into database")
-    upsert_to_database(postgres_conn = postgres_conn, data=transformed_game, table=raw_games, metadata=metadata)
+    upsert_to_database(postgres_conn = postgres_conn, data=transformed_game, table=games, metadata=metadata)
     context.log.info("Data load complete")
