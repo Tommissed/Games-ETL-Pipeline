@@ -15,7 +15,7 @@ from analytics.ops.common import upsert_to_database
 
 class RAWGApiConfig(Config):
     api_key: str = EnvVar("api_key")
-    max_pages: int = 5
+    max_pages: int = 20
 
 
 # ---GAMES start---
@@ -523,7 +523,7 @@ def transformed_platforms(context: OpExecutionContext, raw_platforms: list[dict]
         return []
     
     df_renamed = df.rename(columns={
-        "id": "platforms_id",
+        "id": "platform_id",
         "name": "name",
         "slug": "slug",
         "games_count": "games_count",
@@ -533,7 +533,7 @@ def transformed_platforms(context: OpExecutionContext, raw_platforms: list[dict]
         "year_end" : "year_end",
         "games": "games"
     })
-    df_selected = df_renamed[["platforms_id", "name", "slug",
+    df_selected = df_renamed[["platform_id", "name", "slug",
                             "games_count", "image_background", "games"]]
     context.log.info("PLATFORMS: Finished RAWG data transformation")
     return df_selected.to_dict(orient="records") #convert the transformed dataframe back to a list of dicts for loading
@@ -569,7 +569,7 @@ def platforms(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseReso
         "platforms",
         metadata,
 
-        Column("platforms_id", Integer, primary_key=True, nullable=False),
+        Column("platform_id", Integer, primary_key=True, nullable=False),
         Column("name", Text),
         Column("slug", Text),
         Column("games_count", Integer),
@@ -682,7 +682,7 @@ def transformed_stores(context: OpExecutionContext, raw_stores: list[dict]) -> l
         return []
     
     df_renamed = df.rename(columns={
-        "id": "stores_id",
+        "id": "store_id",
         "name": "name",
         "domain": "domain",
         "slug": "slug",
@@ -690,7 +690,7 @@ def transformed_stores(context: OpExecutionContext, raw_stores: list[dict]) -> l
         "image_background" : "image_background",
         "games": "games"
     })
-    df_selected = df_renamed[["stores_id", "name", "domain", "slug",
+    df_selected = df_renamed[["store_id", "name", "domain", "slug",
                             "games_count", "image_background", "games"]]
     context.log.info("STORES: Finished RAWG data transformation")
     return df_selected.to_dict(orient="records") #convert the transformed dataframe back to a list of dicts for loading
@@ -726,7 +726,7 @@ def stores(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResourc
         "stores",
         metadata,
 
-        Column("stores_id", Integer, primary_key=True, nullable=False),
+        Column("store_id", Integer, primary_key=True, nullable=False),
         Column("name", Text),
         Column("domain", Text),
         Column("slug", Text),
@@ -857,7 +857,7 @@ def transformed_tags(context: OpExecutionContext, raw_tags: list[dict]) -> list[
         return []
     
     df_renamed = df.rename(columns={
-        "id": "tags_id",
+        "id": "tag_id",
         "name": "name",
         "slug": "slug",
         "games_count": "games_count",
@@ -865,7 +865,7 @@ def transformed_tags(context: OpExecutionContext, raw_tags: list[dict]) -> list[
         "language" : "language",
         "games": "games"
     })
-    df_selected = df_renamed[["tags_id", "name", "slug",
+    df_selected = df_renamed[["tag_id", "name", "slug",
                             "games_count", "image_background", "language", "games"]]
     context.log.info("TAGS: Finished RAWG data transformation")
     return df_selected.to_dict(orient="records") #convert the transformed dataframe back to a list of dicts for loading
@@ -901,7 +901,7 @@ def tags(context: OpExecutionContext, postgres_conn: PostgresqlDatabaseResource,
         "tags",
         metadata,
 
-        Column("tags_id", Integer, primary_key=True, nullable=False),
+        Column("tag_id", Integer, primary_key=True, nullable=False),
         Column("name", Text),
         Column("slug", Text),
         Column("games_count", Integer),

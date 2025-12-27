@@ -8,15 +8,11 @@
 }}
 
 select
-    -- _AIRBYTE_RAW_ID,
-    -- _AIRBYTE_EXTRACTED_AT,
-    -- _AIRBYTE_META,
-    -- _AIRBYTE_GENERATION_ID,
-    TBA,
+    GAME_ID,
     NAME,
     SLUG,
+    TBA,
     RATING,
-    GAME_ID,
     RATINGS,
     PLAYTIME,
     RELEASED,

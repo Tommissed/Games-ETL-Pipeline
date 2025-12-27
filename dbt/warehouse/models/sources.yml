@@ -7,3 +7,6 @@ sources:
     tables:
       - name: games
       - name: tags
+      - name: stores
+      - name: genres
+      - name: platforms
