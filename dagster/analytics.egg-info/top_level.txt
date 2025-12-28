@@ -1,2 +1,4 @@
 analytics
 analytics_tests
+logs
+src
