@@ -19,7 +19,6 @@ from {{ ref('games') }} g -- contains the column with the nested json of tags
 join {{ ref('dim_games') }} dg -- contains the surrogate_key used to identify games
 
   on g.game_id = dg.game_id -- join dim_games and games - now i have a table containing all my games, with their game_key and tags JSON
-join lateral flatten(input => parse_json(g.tags)) t -- flatten the json of tags
-  on true
+, lateral flatten(input => parse_json(g.tags)) t -- flatten the json of tags
 join {{ ref('dim_tags') }} dt -- match the tag_id from the flattened json to the id of the tag within dim_tags
   on t.value:id::integer = dt.tag_id

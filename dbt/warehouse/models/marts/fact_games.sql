@@ -1,3 +1,5 @@
+-- transactional fact table
+
 {{ 
     config(
         materialized = "table",
@@ -8,7 +10,7 @@
 -- think to use CTEs to filter for only the columns i need before i join tables.
 
 select
-    dg.game_key, -- FK to dim_games
+    dg.game_key, -- foreign key to dim_games
     g.rating,
     g.ratings,
     g.ratings_count,

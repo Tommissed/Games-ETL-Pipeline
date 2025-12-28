@@ -1,5 +1,6 @@
 from dagster import ConfigurableResource
 
+
 class PostgresqlDatabaseResource(ConfigurableResource):
     DB_SERVER_NAME: str
     DB_DATABASE_NAME: str

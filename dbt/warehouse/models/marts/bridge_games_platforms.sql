@@ -13,7 +13,6 @@ select
 from {{ ref('games') }} g
 join {{ ref('dim_games') }} dg
   on g.game_id = dg.game_id
-join lateral flatten(input => parse_json(g.platforms)) platforms -- creates a table that has makes one row per element in array 
-  on true
+, lateral flatten(input => parse_json(g.platforms)) platforms -- creates a table that has makes one row per element in array 
 join {{ ref('dim_platforms') }} dplatforms
   on platforms.value:platform:id::integer = dplatforms.platform_id -- dig one level deeper than before platformms.values:platform:id

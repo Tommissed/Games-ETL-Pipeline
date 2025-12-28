@@ -2,6 +2,7 @@ from dagster import build_op_context
 
 from analytics.ops.rawg import transform_rawg
 
+
 def test_transform_rawg():
     # ASSEMBEL
     input_data = [
@@ -20,7 +21,7 @@ def test_transform_rawg():
             "playtime": 80,
             "updated": "2023-01-01T00:00:00",
             "platforms": [{"platform": {"name": "PC"}}],
-            "junk_column": "test column to be dropped"
+            "junk_column": "test column to be dropped",
         }
     ]
 
@@ -43,9 +44,9 @@ def test_transform_rawg():
         }
     ]
 
-    #ACT
-    context  = build_op_context()
+    # ACT
+    context = build_op_context()
     actual_data = transform_rawg(context, input_data)
 
-    #ASSERT
+    # ASSERT
     assert actual_data == expected_data

@@ -7,5 +7,5 @@
 
 select
     platform_id,
-    name
+    name as platform_name
 from {{ ref('platforms') }}

@@ -7,5 +7,5 @@
 
 select
     tag_id,
-    name
+    name as tag_name
 from {{ ref('tags') }}

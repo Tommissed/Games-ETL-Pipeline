@@ -7,5 +7,5 @@
 
 select
     genre_id,
-    name
+    name as genre_name
 from {{ ref('genres') }}

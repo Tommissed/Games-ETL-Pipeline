@@ -8,8 +8,8 @@
 select
     {{ dbt_utils.generate_surrogate_key(['game_id']) }} as game_key,
     game_id,
-    name,
-    slug,
+    name as game_name,
+    slug as game_slug,
     released,
     updated_at
 from {{ ref('games') }}

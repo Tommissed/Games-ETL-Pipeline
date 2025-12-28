@@ -7,6 +7,6 @@
 
 select
     store_id,
-    name,
+    name as store_name,
     domain
 from {{ ref('stores') }}
