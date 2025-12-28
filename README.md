@@ -40,3 +40,7 @@ We recommend using a diagramming tool like [draw.io](https://draw.io/) to create
 Here is a sample solution architecture diagram:
 
 ![images/sample-solution-architecture-diagram.png](images/sample-solution-architecture-diagram.png)
+
+## Preset
+
+Insert Images of Preset Dashboard

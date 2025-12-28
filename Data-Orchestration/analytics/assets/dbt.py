@@ -2,12 +2,12 @@ import os
 from pathlib import Path
 
 from dagster_dbt import DbtCliResource, dbt_assets, DagsterDbtTranslator  # type: ignore
-from dagster import AssetExecutionContext
-import dagster as dg
+from dagster import AssetExecutionContext #type: ignore
+import dagster as dg #type: ignore
 
 # configure dbt project resource
 dbt_project_dir = (
-    Path(__file__).joinpath("..", "..", "..", "..", "dbt", "warehouse").resolve()
+    Path(__file__).joinpath("..", "..", "..", "..", "Data-Transformation", "dbt", "warehouse").resolve()
 )
 dbt_warehouse_resource = DbtCliResource(project_dir=os.fspath(dbt_project_dir))
 
