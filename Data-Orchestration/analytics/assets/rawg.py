@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import datetime
 
-from dagster import (
+from dagster import ( #type: ignore
     Config,
     EnvVar,
     OpExecutionContext,
