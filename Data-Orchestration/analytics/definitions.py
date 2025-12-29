@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+from pathlib import Path
+
+load_dotenv(dotenv_path=Path(__file__).parent / ".env", override=True)
+
 from dagster import Definitions, EnvVar, load_assets_from_modules
 
 from analytics.jobs.rawg import run_rawg_etl  # noqa: TID252

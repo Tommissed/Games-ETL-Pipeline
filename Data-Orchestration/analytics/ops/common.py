@@ -40,6 +40,9 @@ def upsert_to_database(
         database=postgres_conn.DB_DATABASE_NAME,
     )
 
+    print("!!!!!!!!!!!!!!!!DEBUG DB_SERVER_NAME:", repr(postgres_conn.DB_SERVER_NAME))
+    print("!!!!!!!!!!!!!!!!DEBUG DB_PORT:", repr(postgres_conn.DB_PORT))
+
     engine = create_engine(connection_url)
     metadata.create_all(engine)
 

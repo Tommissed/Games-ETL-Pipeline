@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+from pathlib import Path
+
+load_dotenv(dotenv_path=Path(__file__).parent / ".env", override=True)
+
 from dagster import EnvVar, AutomationCondition, AssetSpec, AssetKey
 from dagster_airbyte import (
     AirbyteWorkspace,
@@ -22,8 +27,8 @@ class CustomDagsterAirbyteTranslator(DagsterAirbyteTranslator):
 
 
 airbyte_workspace = AirbyteWorkspace(
-    rest_api_base_url="http://localhost:8000/api/public/v1",
-    configuration_api_base_url="http://localhost:8000/api/v1",
+    rest_api_base_url=EnvVar("AIRBYTE_REST_API_BASE_URL"),
+    configuration_api_base_url=EnvVar("AIRBYTE_CONFIGURATION_API_BASE_URL"),
     workspace_id=EnvVar("AIRBYTE_WORKSPACE_ID"),
     client_id=EnvVar("AIRBYTE_CLIENT_ID"),
     client_secret=EnvVar("AIRBYTE_CLIENT_SECRET"),
