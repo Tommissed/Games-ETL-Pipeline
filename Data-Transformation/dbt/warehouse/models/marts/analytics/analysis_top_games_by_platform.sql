@@ -15,12 +15,12 @@
 -- fact_games -- has the ratings
 
 select
-    dp.name as platform_name,
+    dp.platform_name as platform_name,
     rank() over (
         partition by dp.platform_id
         order by fg.rating desc
     ) as platform_rank,
-    dg.name as game_name,
+    dg.game_name as game_name,
     fg.rating
 from {{ ref('bridge_games_platforms') }} bgp
 join {{ ref('dim_platforms') }} dp
